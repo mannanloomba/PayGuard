@@ -13,3 +13,7 @@ __pycache__/
 /debug_bill.pdf
 /temp_bill_test.pdf
 /output.txt
+*.sqlite
+*.sqlite3
+*.db
+*.sqlite3-*
