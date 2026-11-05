@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 import urllib.error
 import urllib.request
 from calendar import monthrange
-from contextlib import closing, contextmanager
+from contextlib import asynccontextmanager, closing, contextmanager
 from datetime import date, timedelta
 from decimal import Decimal, InvalidOperation
 from enum import Enum
@@ -36,7 +36,23 @@ BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR / ".env")
 
 logger = logging.getLogger(__name__)
-app = FastAPI(title="PayGuard API")
+
+
+def demo_mode_enabled() -> bool:
+    return os.getenv("DEMO_MODE", "").strip().casefold() == "true"
+
+
+@asynccontextmanager
+async def application_lifespan(_app: FastAPI):
+    initialize_payments_database()
+    if demo_mode_enabled():
+        from seed_demo_data import seed_demo_data
+
+        seed_demo_data(DATABASE_PATH)
+    yield
+
+
+app = FastAPI(title="PayGuard API", lifespan=application_lifespan)
 MAX_FILE_SIZE = 10 * 1024 * 1024
 MAX_PDF_PAGES = 20
 MAX_IMAGE_PIXELS = 30_000_000

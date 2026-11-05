@@ -2,7 +2,8 @@ FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PAYGUARD_DATABASE_PATH=/var/data/payguard-demo.sqlite3
+    PAYGUARD_DATABASE_PATH=/tmp/payguard-demo.sqlite3 \
+    DEMO_MODE=false
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends tesseract-ocr \

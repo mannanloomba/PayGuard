@@ -421,7 +421,10 @@ def seed_demo_data(database_path: Path = DEMO_DATABASE_PATH) -> dict[str, Any]:
                 _ensure_no_mixed_records(connection)
                 if metadata.get("dataset_version") == DEMO_VERSION:
                     return {"seeded": False, "reason": "already_current", "counts": _counts(connection)}
-                _delete_demo_records(connection)
+                raise RuntimeError(
+                    "The demo database contains an older dataset version. "
+                    "Use reset --confirm before reseeding it."
+                )
             else:
                 _ensure_no_mixed_records(connection)
             _insert_demo_records(connection)

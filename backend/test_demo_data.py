@@ -1,3 +1,4 @@
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -68,6 +69,26 @@ class DemoDataSeedTests(unittest.TestCase):
         self.assertEqual(analytics["budgets"][0]["currency"], "INR")
         with patch.object(main, "BASE_DIR", Path(self.temp_dir.name)):
             self.assertTrue(self.client.get("/api/health").json()["demo_mode"])
+
+    def test_demo_mode_seeds_after_startup_schema_creation(self) -> None:
+        with patch.dict(os.environ, {"DEMO_MODE": "true"}), patch.object(
+            main, "DATABASE_PATH", self.database_path
+        ):
+            with TestClient(main.app) as client:
+                self.assertEqual(client.get("/api/health").json()["demo_mode"], True)
+                self.assertEqual(len(client.get("/api/bills").json()), 4)
+
+    def test_startup_does_not_seed_when_demo_mode_is_disabled(self) -> None:
+        with patch.dict(os.environ, {}, clear=False):
+            os.environ.pop("DEMO_MODE", None)
+            with patch.object(main, "DATABASE_PATH", self.database_path):
+                with TestClient(main.app):
+                    pass
+        with main.database_connection() as connection:
+            metadata_table = connection.execute(
+                "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'demo_metadata'"
+            ).fetchone()
+        self.assertIsNone(metadata_table)
 
     def test_assistant_receives_real_seeded_bills_payments_and_paused_rule_context(self) -> None:
         seed_demo_data.seed_demo_data(self.database_path)

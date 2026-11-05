@@ -7,7 +7,9 @@ services:
     healthCheckPath: /api/health
     envVars:
       - key: PAYGUARD_DATABASE_PATH
-        value: /var/data/payguard-demo.sqlite3
+        value: /tmp/payguard-demo.sqlite3
+      - key: DEMO_MODE
+        value: "true"
       - key: PAYGUARD_COOKIE_SECURE
         value: "true"
       - key: PAYGUARD_COOKIE_SAMESITE
@@ -22,7 +24,3 @@ services:
         value: qwen-3.8-27b
       - key: TESSERACT_LANG
         value: eng
-    disk:
-      name: payguard-data
-      mountPath: /var/data
-      sizeGB: 1
