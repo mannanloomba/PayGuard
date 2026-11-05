@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sqlite3
 import sys
 from datetime import date, datetime, timedelta, timezone
@@ -14,7 +15,12 @@ from unittest.mock import patch
 import main
 
 
-DEMO_DATABASE_PATH = (Path(__file__).resolve().parent / "payguard-demo.sqlite3").resolve()
+DEMO_DATABASE_PATH = Path(
+    os.getenv(
+        "PAYGUARD_DATABASE_PATH",
+        str(Path(__file__).resolve().parent / "payguard-demo.sqlite3"),
+    )
+).resolve()
 DEMO_OWNER = "payguard-fictional-demo"
 DEMO_VERSION = "2026-11-v2"
 DEMO_PREFIX = "demo-"

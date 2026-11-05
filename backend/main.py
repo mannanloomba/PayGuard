@@ -1821,7 +1821,7 @@ def get_document_type(file: UploadFile, content: bytes) -> str:
 async def health() -> dict[str, Any]:
     bharatcode_configured = bool(os.getenv("BHARATCODE_API_KEY", "").strip())
     demo_mode = False
-    demo_database = (BASE_DIR / "payguard-demo.sqlite3").resolve()
+    demo_database = DATABASE_PATH.resolve()
     if DATABASE_PATH.resolve() == demo_database and demo_database.is_file():
         try:
             with closing(sqlite3.connect(demo_database)) as connection:
