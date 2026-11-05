@@ -1,0 +1,15 @@
+node_modules
+dist
+*.local
+*.tsbuildinfo
+.pytest_cache/
+.env
+.env.*
+!.env.example
+__pycache__/
+.venv/
+/backend/*.sqlite3
+/backend/*.sqlite3-*
+/debug_bill.pdf
+/temp_bill_test.pdf
+/output.txt

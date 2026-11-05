@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: payguard-api
+    runtime: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn main:app --app-dir backend --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PAYGUARD_DATABASE_PATH
+        value: /var/data/payguard.sqlite3
+      - key: PAYGUARD_COOKIE_SECURE
+        value: "true"
+      - key: PAYGUARD_COOKIE_SAMESITE
+        value: none
+      - key: PAYGUARD_CORS_ORIGINS
+        sync: false
+      - key: BHARATCODE_API_KEY
+        sync: false
+      - key: BHARATCODE_BASE_URL
+        value: https://bharatcode.ai/api/model/v1
+      - key: BHARATCODE_MODEL
+        value: qwen-3.8-27b
+      - key: TESSERACT_LANG
+        value: eng
+    disk:
+      name: payguard-data
+      mountPath: /var/data
+      sizeGB: 1

@@ -1,0 +1,30 @@
+PayGuard AI — BharatCode Qwen integration
+
+Provider configuration:
+  BHARATCODE_API_KEY
+  BHARATCODE_BASE_URL=https://bharatcode.ai/api/model/v1
+  BHARATCODE_MODEL=qwen-3.8-27b
+
+The FastAPI backend calls <BHARATCODE_BASE_URL>/chat/completions with:
+  - the configured Qwen model
+  - store=false
+  - JSON response mode
+  - bounded timeout and explicit provider error handling
+  - request IDs without logging prompts, response bodies, or credentials
+
+AI use cases:
+  1. Bill extraction: local PyMuPDF/Tesseract text is sent for validated structured fields.
+  2. Assistant interpretation: conversation plus saved records is sent for a constrained action/query schema.
+  3. Bill, payment, and QR explanations: only structured records and deterministic evidence are sent.
+  4. Spending insights: only aggregate saved-transaction and budget evidence is sent.
+
+Safety boundaries:
+  - Original bill files, image bytes, and raw QR images are not sent to BharatCode.
+  - Pydantic schemas validate model output before it is used.
+  - Duplicate checks, risk scores, totals, payment state, recipient matching, and validation are deterministic backend logic.
+  - Assistant mutations create server-side, session-bound, expiring proposals requiring a one-time confirmation token.
+  - BharatCode cannot save, approve, execute, or refund a payment.
+  - All payment workflows use the local sandbox simulator; no bank, UPI, card, marketplace, or gateway is connected.
+  - Model explanations are not identity, account-ownership, bank, or fraud verification.
+
+The optional backend/payguard-demo.sqlite3 database contains clearly labelled fictional records. It must remain isolated from a personal or production database.

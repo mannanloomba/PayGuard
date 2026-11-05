@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">PayGuard AI feature map</title>
+  <desc id="desc">Original diagram showing four bounded AI features connected to user review and deterministic safety controls.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#4f46e5"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="700" rx="32" fill="url(#background)"/>
+  <text x="70" y="70" fill="#0f172a" font-family="Arial,sans-serif" font-size="32" font-weight="700">PayGuard AI feature map</text>
+  <text x="70" y="105" fill="#64748b" font-family="Arial,sans-serif" font-size="18">AI interprets evidence; deterministic controls keep payment decisions reviewable.</text>
+
+  <rect x="70" y="155" width="270" height="170" rx="22" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="100" y="200" fill="#5b21b6" font-family="Arial,sans-serif" font-size="23" font-weight="700">Bill intelligence</text>
+  <text x="100" y="237" fill="#312e81" font-family="Arial,sans-serif" font-size="17">OCR text → structured fields</text>
+  <text x="100" y="267" fill="#312e81" font-family="Arial,sans-serif" font-size="17">Provider, amount, dates, IDs</text>
+  <text x="100" y="297" fill="#312e81" font-family="Arial,sans-serif" font-size="17">Editable before saving</text>
+
+  <rect x="70" y="390" width="270" height="170" rx="22" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="100" y="435" fill="#5b21b6" font-family="Arial,sans-serif" font-size="23" font-weight="700">AI assistant</text>
+  <text x="100" y="472" fill="#312e81" font-family="Arial,sans-serif" font-size="17">History and upcoming payments</text>
+  <text x="100" y="502" fill="#312e81" font-family="Arial,sans-serif" font-size="17">Duplicates, reminders, limits</text>
+  <text x="100" y="532" fill="#312e81" font-family="Arial,sans-serif" font-size="17">Proposals need confirmation</text>
+
+  <rect x="860" y="155" width="270" height="170" rx="22" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="890" y="200" fill="#5b21b6" font-family="Arial,sans-serif" font-size="23" font-weight="700">Risk explanations</text>
+  <text x="890" y="237" fill="#312e81" font-family="Arial,sans-serif" font-size="17">Bill, payment, QR evidence</text>
+  <text x="890" y="267" fill="#312e81" font-family="Arial,sans-serif" font-size="17">Readable grounded summary</text>
+  <text x="890" y="297" fill="#312e81" font-family="Arial,sans-serif" font-size="17">No authoritative AI score</text>
+
+  <rect x="860" y="390" width="270" height="170" rx="22" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="890" y="435" fill="#5b21b6" font-family="Arial,sans-serif" font-size="23" font-weight="700">Financial insights</text>
+  <text x="890" y="472" fill="#312e81" font-family="Arial,sans-serif" font-size="17">Aggregate spending evidence</text>
+  <text x="890" y="502" fill="#312e81" font-family="Arial,sans-serif" font-size="17">Budgets and category trends</text>
+  <text x="890" y="532" fill="#312e81" font-family="Arial,sans-serif" font-size="17">Concise observations</text>
+
+  <rect x="425" y="255" width="350" height="205" rx="28" fill="url(#core)"/>
+  <text x="600" y="315" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="28" font-weight="700">BharatCode Qwen</text>
+  <text x="600" y="352" text-anchor="middle" fill="#ddd6fe" font-family="Arial,sans-serif" font-size="18">bounded interpretation layer</text>
+  <text x="600" y="395" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="17">Explain · extract · understand · summarize</text>
+  <text x="600" y="428" text-anchor="middle" fill="#c4b5fd" font-family="Arial,sans-serif" font-size="15">Never authorizes a payment</text>
+
+  <path d="M340 240 H425" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M340 475 H425" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M775 330 H860" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M775 475 H860" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="345" y="600" width="510" height="52" rx="18" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="600" y="633" text-anchor="middle" fill="#166534" font-family="Arial,sans-serif" font-size="17" font-weight="700">User review → deterministic checks → explicit sandbox approval</text>
+</svg>

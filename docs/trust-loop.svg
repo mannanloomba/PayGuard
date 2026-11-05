@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">PayGuard trust loop</title>
+  <desc id="desc">Original illustration of PayGuard's four-step loop: understand, compare, explain, approve.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" x2="1">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="520" rx="32" fill="url(#bg)"/>
+  <text x="600" y="58" text-anchor="middle" fill="#0f172a" font-family="Arial,sans-serif" font-size="30" font-weight="700">A payment decision becomes a trust loop</text>
+  <text x="600" y="89" text-anchor="middle" fill="#64748b" font-family="Arial,sans-serif" font-size="17">Every step makes the next decision more visible — without giving AI the final authority.</text>
+  <circle cx="600" cy="285" r="95" fill="url(#blue)"/>
+  <text x="600" y="276" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="24" font-weight="700">PayGuard</text>
+  <text x="600" y="307" text-anchor="middle" fill="#dbeafe" font-family="Arial,sans-serif" font-size="17">review layer</text>
+  <rect x="70" y="180" width="220" height="125" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="180" y="225" text-anchor="middle" fill="#1e3a8a" font-family="Arial,sans-serif" font-size="22" font-weight="700">1 · Understand</text>
+  <text x="180" y="260" text-anchor="middle" fill="#475569" font-family="Arial,sans-serif" font-size="16">OCR, QR decode, AI</text>
+  <text x="180" y="284" text-anchor="middle" fill="#475569" font-family="Arial,sans-serif" font-size="16">extracts context</text>
+  <rect x="910" y="180" width="220" height="125" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="1020" y="225" text-anchor="middle" fill="#166534" font-family="Arial,sans-serif" font-size="22" font-weight="700">2 · Compare</text>
+  <text x="1020" y="260" text-anchor="middle" fill="#475569" font-family="Arial,sans-serif" font-size="16">History, duplicates,</text>
+  <text x="1020" y="284" text-anchor="middle" fill="#475569" font-family="Arial,sans-serif" font-size="16">risk signals</text>
+  <rect x="245" y="385" width="260" height="100" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="375" y="427" text-anchor="middle" fill="#6d28d9" font-family="Arial,sans-serif" font-size="22" font-weight="700">3 · Explain</text>
+  <text x="375" y="458" text-anchor="middle" fill="#475569" font-family="Arial,sans-serif" font-size="16">Evidence becomes</text>
+  <text x="375" y="480" text-anchor="middle" fill="#475569" font-family="Arial,sans-serif" font-size="16">understandable</text>
+  <rect x="695" y="385" width="260" height="100" rx="20" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="825" y="427" text-anchor="middle" fill="#166534" font-family="Arial,sans-serif" font-size="22" font-weight="700">4 · Approve</text>
+  <text x="825" y="458" text-anchor="middle" fill="#14532d" font-family="Arial,sans-serif" font-size="16">User confirms a</text>
+  <text x="825" y="480" text-anchor="middle" fill="#14532d" font-family="Arial,sans-serif" font-size="16">sandbox-only action</text>
+  <path d="M290 240 H490" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M710 240 H910" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M930 315 C900 355 850 370 820 385" fill="none" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M380 385 C360 350 330 335 290 310" fill="none" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">Illustrative PayGuard risk signal graph</title>
+  <desc id="desc">An illustrative bar graph showing low, medium, and high review bands. It is not measured performance.</desc>
+  <rect width="900" height="560" rx="28" fill="#0f172a"/>
+  <text x="55" y="65" fill="#f8fafc" font-family="Arial,sans-serif" font-size="28" font-weight="700">Illustrative review bands</text>
+  <text x="55" y="98" fill="#94a3b8" font-family="Arial,sans-serif" font-size="16">Heuristic categories — not fraud probabilities</text>
+  <line x1="110" y1="430" x2="820" y2="430" stroke="#475569" stroke-width="2"/>
+  <line x1="110" y1="150" x2="110" y2="430" stroke="#475569" stroke-width="2"/>
+  <line x1="110" y1="337" x2="820" y2="337" stroke="#334155" stroke-width="1" stroke-dasharray="6 8"/>
+  <line x1="110" y1="243" x2="820" y2="243" stroke="#334155" stroke-width="1" stroke-dasharray="6 8"/>
+  <rect x="180" y="350" width="130" height="80" rx="12" fill="#22c55e"/>
+  <rect x="390" y="280" width="130" height="150" rx="12" fill="#facc15"/>
+  <rect x="600" y="190" width="130" height="240" rx="12" fill="#f43f5e"/>
+  <text x="245" y="465" text-anchor="middle" fill="#cbd5e1" font-family="Arial,sans-serif" font-size="20" font-weight="700">LOW</text>
+  <text x="455" y="465" text-anchor="middle" fill="#cbd5e1" font-family="Arial,sans-serif" font-size="20" font-weight="700">MEDIUM</text>
+  <text x="665" y="465" text-anchor="middle" fill="#cbd5e1" font-family="Arial,sans-serif" font-size="20" font-weight="700">HIGH</text>
+  <text x="70" y="438" text-anchor="end" fill="#94a3b8" font-family="Arial,sans-serif" font-size="14">review</text>
+  <text x="70" y="250" text-anchor="end" fill="#94a3b8" font-family="Arial,sans-serif" font-size="14">signals</text>
+  <text x="450" y="525" text-anchor="middle" fill="#64748b" font-family="Arial,sans-serif" font-size="15">Example visual only — the app evaluates configured evidence per record</text>
+</svg>

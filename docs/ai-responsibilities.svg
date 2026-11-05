@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">PayGuard AI responsibilities</title>
+  <desc id="desc">AI interprets and explains evidence, while application logic calculates risk and controls approval.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="900" height="560" rx="28" fill="url(#bg)"/>
+  <text x="50" y="62" fill="#0f172a" font-family="Arial,sans-serif" font-size="28" font-weight="700">Two lanes. One safer review.</text>
+  <rect x="50" y="100" width="360" height="360" rx="22" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="80" y="150" fill="#5b21b6" font-family="Arial,sans-serif" font-size="24" font-weight="700">AI-assisted</text>
+  <text x="80" y="194" fill="#312e81" font-family="Arial,sans-serif" font-size="19">• Extracted bill interpretation</text>
+  <text x="80" y="234" fill="#312e81" font-family="Arial,sans-serif" font-size="19">• Grounded risk explanations</text>
+  <text x="80" y="274" fill="#312e81" font-family="Arial,sans-serif" font-size="19">• Assistant intent understanding</text>
+  <text x="80" y="314" fill="#312e81" font-family="Arial,sans-serif" font-size="19">• Spending observations</text>
+  <text x="80" y="390" fill="#6d28d9" font-family="Arial,sans-serif" font-size="17" font-weight="700">Explains supplied evidence</text>
+  <rect x="490" y="100" width="360" height="360" rx="22" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="520" y="150" fill="#166534" font-family="Arial,sans-serif" font-size="24" font-weight="700">Application logic</text>
+  <text x="520" y="194" fill="#14532d" font-family="Arial,sans-serif" font-size="19">• Risk score and level</text>
+  <text x="520" y="234" fill="#14532d" font-family="Arial,sans-serif" font-size="19">• Duplicate matching</text>
+  <text x="520" y="274" fill="#14532d" font-family="Arial,sans-serif" font-size="19">• Historical thresholds</text>
+  <text x="520" y="314" fill="#14532d" font-family="Arial,sans-serif" font-size="19">• Approval and payment state</text>
+  <text x="520" y="390" fill="#15803d" font-family="Arial,sans-serif" font-size="17" font-weight="700">Controls the workflow</text>
+  <path d="M410 280 H490" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="450" y="260" text-anchor="middle" fill="#475569" font-family="Arial,sans-serif" font-size="15">review</text>
+  <text x="450" y="520" text-anchor="middle" fill="#64748b" font-family="Arial,sans-serif" font-size="16">Human approval remains the final gate</text>
+</svg>
