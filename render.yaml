@@ -22,5 +22,7 @@ services:
         value: https://bharatcode.ai/api/model/v1
       - key: BHARATCODE_MODEL
         value: qwen-3.8-27b
+      - key: BHARATCODE_TIMEOUT_SECONDS
+        value: "45"
       - key: TESSERACT_LANG
         value: eng
