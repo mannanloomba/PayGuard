@@ -25,6 +25,12 @@
 
 > **Safety boundary:** No real bank, UPI network, card processor, merchant, or live payment gateway is connected. The application records simulated sandbox outcomes only.
 
+## Live demo
+
+**Render deployment:** [https://payguard-vqu7.onrender.com](https://payguard-vqu7.onrender.com/)
+
+The public deployment is a single-user, fictional hackathon demonstration. Use `/docs` to inspect the FastAPI API surface.
+
 ## Why this matters
 
 Payment interfaces are optimized for speed. Safety decisions need the opposite: context, comparison, and a clear moment to stop.
@@ -44,6 +50,12 @@ PayGuard is designed around that missing review layer:
 ![PayGuard trust loop](docs/trust-loop.svg)
 
 PayGuard combines **local processing**, **bounded AI interpretation**, **deterministic safety checks**, and **human approval**. The design intentionally does not let the language model become the payment authority.
+
+## Architecture
+
+![PayGuard architecture and responsibility split](docs/ai-responsibilities.svg)
+
+The React/Vite frontend is built into the Docker image and served by FastAPI. FastAPI owns SQLite access, deterministic risk checks, sandbox payment state, local PDF/OCR processing, and the approval workflow. BharatCode receives bounded, extracted text or structured evidence for interpretation; it does not receive unrestricted document or payment authority.
 
 ## What makes the AI useful — and safe
 
@@ -285,7 +297,13 @@ Tests use temporary databases and mocked provider responses. They do not prove l
 
 - Payments are simulated through the sandbox provider. No real bank or UPI transfer is performed.
 - Risk scores are heuristic assessments, not calibrated fraud probabilities.
-- The application currently uses SQLite and is intended for the documented single-process sandbox deployment.
+- The Render deployment uses one Docker web service and SQLite at `/tmp/payguard-demo.sqlite3`; it is intended only for a single-user hackathon demo.
+- Render Free has limited compute (approximately 512 MB RAM and 0.1 CPU), so cold starts, OCR, and concurrent requests can be slow.
+- The `/tmp` database is ephemeral on Render Free. A restart, redeploy, or instance replacement can remove records; fictional demo data is recreated only when `DEMO_MODE=true`.
+- SQLite is not configured for multi-instance or production-scale concurrent traffic.
+- Bill extraction first reads embedded PDF text locally; scanned PDFs fall back to Tesseract OCR and can take substantially longer or exceed the available memory for large documents.
+- Structured bill extraction and AI explanations depend on the remote BharatCode service, its configured `qwen-3.8-27b` model, API availability, rate limits, and response latency.
+- BharatCode credentials are supplied through Render environment variables and are never part of the repository.
 - Anonymous sessions are not full user authentication or multi-user identity.
 - Recipient confirmation is a local user attestation, not bank or account-ownership verification.
 - “Successful” records mean sandbox simulator outcomes, not provider-confirmed settlement.
@@ -315,4 +333,3 @@ docs/
 PayGuard is not trying to replace a bank, fraud team, or human judgment. It demonstrates a safer pattern for AI-assisted payments:
 
 > **AI makes the evidence understandable. Deterministic logic makes the checks repeatable. The user stays in control.**
-
