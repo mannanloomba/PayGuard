@@ -29,7 +29,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import pymupdf
 from PIL import Image, UnidentifiedImageError
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator, model_validator
-from starlette.responses import JSONResponse
+from starlette.responses import FileResponse, JSONResponse
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -58,6 +58,9 @@ MAX_PDF_PAGES = 20
 MAX_IMAGE_PIXELS = 30_000_000
 MAX_DOCUMENT_TEXT_LENGTH = 60_000
 DATABASE_PATH = Path(os.getenv("PAYGUARD_DATABASE_PATH", str(BASE_DIR / "payguard.sqlite3")))
+FRONTEND_DIST = Path(
+    os.getenv("PAYGUARD_FRONTEND_DIST", str(BASE_DIR.parent / "dist"))
+).resolve()
 UPI_IDENTIFIER_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,255}@[A-Za-z][A-Za-z0-9.-]{0,62}$")
 SESSION_COOKIE = "payguard_session"
 CSRF_COOKIE = "payguard_csrf"
@@ -4947,3 +4950,23 @@ async def extract_bill(file: Annotated[UploadFile, File()]) -> BillExtraction:
     except (ValidationError, ValueError) as error:
         logger.exception("BharatCode returned invalid bill extraction data")
         raise HTTPException(status_code=502, detail="BharatCode returned invalid bill details. Please try again.") from error
+
+
+@app.get("/{frontend_path:path}", include_in_schema=False)
+async def serve_frontend(frontend_path: str):
+    if frontend_path == "api" or frontend_path.startswith("api/"):
+        raise HTTPException(status_code=404, detail="Not Found")
+
+    requested_file = (FRONTEND_DIST / frontend_path).resolve()
+    try:
+        requested_file.relative_to(FRONTEND_DIST)
+    except ValueError as error:
+        raise HTTPException(status_code=404, detail="Not Found") from error
+
+    if requested_file.is_file():
+        return FileResponse(requested_file)
+
+    index_file = FRONTEND_DIST / "index.html"
+    if index_file.is_file():
+        return FileResponse(index_file)
+    raise HTTPException(status_code=404, detail="Frontend build is not available.")

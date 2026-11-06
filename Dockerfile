@@ -1,3 +1,13 @@
+FROM node:22-slim AS frontend-build
+
+WORKDIR /app
+
+COPY package.json package-lock.json index.html postcss.config.js tailwind.config.js tsconfig*.json vite.config.ts ./
+COPY src ./src
+
+RUN npm ci
+RUN npm run build
+
 FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -15,6 +25,7 @@ COPY backend/requirements.txt backend/requirements.txt
 RUN pip install --no-cache-dir -r backend/requirements.txt
 
 COPY backend backend
+COPY --from=frontend-build /app/dist dist
 
 EXPOSE 10000
 
