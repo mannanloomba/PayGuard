@@ -13,6 +13,30 @@ import main
 
 
 class BillExtractionTests(unittest.TestCase):
+    def test_numeric_units_consumed_is_normalized_to_string(self) -> None:
+        result = main.BillExtraction.model_validate({"units_consumed": 286})
+        self.assertEqual(result.units_consumed, "286")
+        self.assertIsInstance(result.units_consumed, str)
+
+    def test_string_units_consumed_preserves_explicit_unit(self) -> None:
+        result = main.BillExtraction.model_validate({"units_consumed": "286 kWh"})
+        self.assertEqual(result.units_consumed, "286 kWh")
+
+    def test_missing_or_null_units_consumed_remains_missing(self) -> None:
+        self.assertIsNone(main.BillExtraction.model_validate({}).units_consumed)
+        self.assertIsNone(
+            main.BillExtraction.model_validate({"units_consumed": None}).units_consumed
+        )
+
+    def test_invalid_units_consumed_values_are_rejected(self) -> None:
+        for value in (True, [], {}, float("inf")):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                main.BillExtraction.model_validate({"units_consumed": value})
+
+    def test_numeric_units_are_serialized_as_strings_in_api_shape(self) -> None:
+        result = main.BillExtraction.model_validate({"units_consumed": 286})
+        self.assertEqual(result.model_dump()["units_consumed"], "286")
+
     def test_pdf_embedded_text_skips_ocr_and_is_cleaned(self) -> None:
         document = pymupdf.open()
         page = document.new_page()

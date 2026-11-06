@@ -231,6 +231,17 @@ class BillExtraction(BaseModel):
     missing_fields: list[str] = Field(default_factory=list, max_length=20)
     uncertain_fields: list[str] = Field(default_factory=list, max_length=20)
 
+    @field_validator("units_consumed", mode="before")
+    @classmethod
+    def normalize_units_consumed(cls, value: Any) -> Any:
+        if value is None or isinstance(value, str):
+            return value
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise ValueError("Units consumed must be a string or finite number")
+        if not math.isfinite(value):
+            raise ValueError("Units consumed must be a finite number")
+        return str(value)
+
     @field_validator(
         "provider_name",
         "customer_name",
