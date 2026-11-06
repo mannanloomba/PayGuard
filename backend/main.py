@@ -60,7 +60,7 @@ MAX_IMAGE_PIXELS = 30_000_000
 MAX_DOCUMENT_TEXT_LENGTH = 60_000
 MAX_MODEL_DOCUMENT_TEXT_LENGTH = 12_000
 MIN_USABLE_PDF_TEXT_LENGTH = 40
-MAX_EXTRACTION_OUTPUT_TOKENS = 600
+MAX_EXTRACTION_OUTPUT_TOKENS = 900
 DATABASE_PATH = Path(os.getenv("PAYGUARD_DATABASE_PATH", str(BASE_DIR / "payguard.sqlite3")))
 FRONTEND_DIST = Path(
     os.getenv("PAYGUARD_FRONTEND_DIST", str(BASE_DIR.parent / "dist"))
@@ -1703,6 +1703,15 @@ def clean_extracted_text(text: str) -> str:
         if line.strip()
     )
     return cleaned[:MAX_DOCUMENT_TEXT_LENGTH]
+
+
+def normalize_json_response(text: str) -> str:
+    normalized = text.strip()
+    if normalized.startswith("```") and normalized.endswith("```"):
+        lines = normalized.splitlines()
+        if len(lines) >= 3:
+            normalized = "\n".join(lines[1:-1]).strip()
+    return normalized
 
 
 def run_local_ocr(image_bytes: bytes, tesseract_path: str) -> str:
@@ -4987,7 +4996,7 @@ async def extract_bill(file: Annotated[UploadFile, File()]) -> BillExtraction:
         extraction_text = await call_bharatcode(EXTRACTION_PROMPT, prompt)
         api_duration_ms = (time.perf_counter() - api_started_at) * 1000
         validation_started_at = time.perf_counter()
-        result = BillExtraction.model_validate_json(extraction_text)
+        result = BillExtraction.model_validate_json(normalize_json_response(extraction_text))
         validation_duration_ms = (time.perf_counter() - validation_started_at) * 1000
         logger.info(
             "Bill extraction timings upload_read_ms=%.1f local_text_ms=%.1f "

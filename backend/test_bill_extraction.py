@@ -75,3 +75,35 @@ class BillExtractionTests(unittest.TestCase):
             for path in root.iterdir():
                 path.unlink()
             root.rmdir()
+
+    def test_fenced_valid_model_response_is_validated_as_bill(self) -> None:
+        valid_response = """```json
+        {
+          "provider_name": "Fictional Electricity Co.",
+          "customer_name": "Demo Customer",
+          "bill_amount": 2450,
+          "tax_amount": 100,
+          "currency": "INR",
+          "billing_date": "2026-11-01",
+          "due_date": "2026-11-15",
+          "invoice_number": "DEMO-INV-01",
+          "account_reference": "DEMO-ACCOUNT-01",
+          "units_consumed": "120 kWh",
+          "billing_period": "October 2026",
+          "document_type": "utility_bill",
+          "missing_fields": [],
+          "uncertain_fields": []
+        }
+        ```"""
+        result = main.BillExtraction.model_validate_json(
+            main.normalize_json_response(valid_response)
+        )
+        self.assertEqual(result.provider_name, "Fictional Electricity Co.")
+        self.assertEqual(result.bill_amount, 2450)
+
+    def test_truncated_model_response_still_fails_validation(self) -> None:
+        truncated_response = '{"provider_name":"Fictional Electricity Co.","bill_amount":2450'
+        with self.assertRaises(ValueError):
+            main.BillExtraction.model_validate_json(
+                main.normalize_json_response(truncated_response)
+            )
