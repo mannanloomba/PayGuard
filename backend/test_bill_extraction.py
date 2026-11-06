@@ -49,7 +49,7 @@ class BillExtractionTests(unittest.TestCase):
                 with self.assertRaises(HTTPException) as raised:
                     await main.call_bharatcode("system", "user")
             self.assertEqual(raised.exception.status_code, 504)
-            self.assertEqual(urlopen.call_count, 2)
+            self.assertEqual(urlopen.call_count, 1)
 
         asyncio.run(run())
 

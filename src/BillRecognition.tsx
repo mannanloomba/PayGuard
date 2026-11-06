@@ -511,6 +511,7 @@ export default function BillRecognition() {
   const [uploadError, setUploadError] = useState('')
   const [extractionError, setExtractionError] = useState('')
   const [isExtracting, setIsExtracting] = useState(false)
+  const [extractionStage, setExtractionStage] = useState('')
   const [details, setDetails] = useState<BillDetails | null>(null)
   const [savedBills, setSavedBills] = useState<SavedBill[]>([])
   const [paymentRequests, setPaymentRequests] = useState<PaymentRequest[]>([])
@@ -574,14 +575,20 @@ export default function BillRecognition() {
   async function extractDetails() {
     if (!file) return
     setIsExtracting(true)
+    setExtractionStage('Reading the PDF locally…')
     setExtractionError('')
     setConfirmedMessage('')
+    const stageTimer = window.setTimeout(() => {
+      setExtractionStage('Analyzing bill details with BharatCode…')
+    }, 1200)
     try {
       setDetails(await extractBillDetails(file))
     } catch (error) {
       setExtractionError(error instanceof Error ? error.message : 'Bill extraction failed. Please try again.')
     } finally {
+      window.clearTimeout(stageTimer)
       setIsExtracting(false)
+      setExtractionStage('')
     }
   }
 
@@ -767,7 +774,7 @@ export default function BillRecognition() {
                 disabled={isExtracting}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-electric px-4 py-3 text-sm font-medium text-white shadow-sm shadow-blue-200 transition hover:bg-blue-700 disabled:cursor-wait disabled:opacity-70"
               >
-                {isExtracting ? <><LoaderCircle size={17} className="animate-spin" /> Reading locally and analyzing…</> : <><Sparkles size={17} /> Extract details</>}
+                {isExtracting ? <><LoaderCircle size={17} className="animate-spin" /> {extractionStage}</> : <><Sparkles size={17} /> Extract details</>}
               </button>
               {extractionError && <p role="alert" className="text-xs text-rose-600">{extractionError}</p>}
             </div>
